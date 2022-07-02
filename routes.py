@@ -3,6 +3,7 @@ from person_data import *
 import uvicorn
 
 app = FastAPI()
+US_API_GEN = Person_US_API()
 
 
 @app.get("/")
@@ -12,12 +13,12 @@ async def Hg():
 
 @app.get("/fake/firstname")
 async def get_fake() -> str:
-    return Person_US_API().get_first_name()
+    return US_API_GEN.get_first_name()
 
 
 @app.get("/fake/lastname")
 async def get_fake_lastname() -> str:
-    return Person_US_API().get_last_name()
+    return US_API_GEN.get_last_name()
 
 if __name__ == ("__main__"):
-    uvicorn.run('main:app', reload=True, debug=True)
+    uvicorn.run('routes:app', reload=True, debug=True)
