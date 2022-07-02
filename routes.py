@@ -20,4 +20,4 @@ async def get_fake_lastname() -> str:
     return Person_US_API().get_last_name()
 
 if __name__ == ("__main__"):
-    uvicorn.run('main:app', reload=True, debug=True)
+    uvicorn.run('routes:app', reload=True, debug=True)
