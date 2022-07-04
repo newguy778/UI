@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from person_data import *
+from Person.person_data import *
 import uvicorn
 
 app = FastAPI()
