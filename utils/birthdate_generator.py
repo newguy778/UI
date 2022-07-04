@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 import datetime
 import random
 DAYS_IN_MONTH = list(range(1,32))
@@ -20,14 +19,13 @@ def random_day(month) -> int:
 def random_year() -> int:
     datetime.MINYEAR: int = 1945
     CURRENT_YEAR: int = datetime.date.today().year
-    
+    yield random.choice(list(range(datetime.MINYEAR, CURRENT_YEAR-19)))    
 
-# for _ in range(12):
-#     month = next(random_month())
-#     print(month, random_day(month))
-    
-print(datetime.date(datetime.MINYEAR,2,2))
-print()
-    
-    
+def generate_date() -> tuple:
+    year,month = next(random_year()), next(random_month())
+    return year,month,random_day(month)
+
+if __name__ == "__main__":
+    for _ in range(12):
+        print(datetime.date(*generate_date()))
 
