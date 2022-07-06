@@ -3,7 +3,7 @@ from Person.person_data import *
 import uvicorn
 
 app = FastAPI()
-US_API_GEN = Person_US_API()
+US_API_GEN = Person_US()
 
 
 @app.get("/")
