@@ -1,5 +1,5 @@
 from faker.providers.person import en_US
-from faker import Factory, Faker
+from faker import Factory
 from typing import Any
 from faker.generator import Generator
 
