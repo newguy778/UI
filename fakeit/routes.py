@@ -29,9 +29,6 @@ async def Hg():
 #     return IN_API_GEN.get_last_name()
 
 
-@app.get("/v1/dob")
-async def get_fake_lastname() -> str:
-    return IN_API_GEN.get_birthdate()
 
 if __name__ == ("__main__"):
-    uvicorn.run('routes:app', reload=True, debug=True)
+    uvicorn.run('routes:app',reload=True, debug=True, host='0.0.0.0',port=8000)
