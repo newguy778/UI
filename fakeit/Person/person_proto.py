@@ -35,5 +35,8 @@ class _Person(PersonProvider):
             self.cached_val["first_name"], self.cached_val["last_name"])
         return ",".join(full_name)
 
+    def get_quantity_full_name(self, quantity: int):
+        pass
+
     def get_birthdate(self) -> tuple:
         return generate_date()

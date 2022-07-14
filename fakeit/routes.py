@@ -7,13 +7,11 @@ import uvicorn
 
 app = FastAPI()
 app.include_router(person_router.person_router)
-US_API_GEN = Person_US()
-IN_API_GEN = Person_IN()
 
 
-# @app.get("/")
-# async def Hg():
-#     return {"asdasd": "Hello World"}
+@app.get("/")
+async def Hg():
+    return {"asdasd": "Hello World"}
 
 
 # @app.get("/v1/firstname")
