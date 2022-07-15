@@ -2,6 +2,11 @@ import datetime
 import random
 DAYS_IN_MONTH = list(range(1, 32))
 
+"""
+TODO: Generate Date based on locality format create function and call that instead.
+
+"""
+
 
 def random_month() -> int:
     yield random.choice(list(range(1, 13)))
@@ -25,11 +30,15 @@ def random_year() -> int:
     yield random.choice(list(range(datetime.MINYEAR, CURRENT_YEAR-19)))
 
 
-def generate_date() -> tuple:
+def _generate_date() -> tuple:
     year, month = next(random_year()), next(random_month())
     return year, month, random_day(month)
 
 
+def generate_date_obj() -> datetime.date:
+    return datetime.date(*_generate_date())
+
+
 if __name__ == "__main__":
     for _ in range(12):
-        print(datetime.date(*generate_date()))
+        print(generate_date_obj())

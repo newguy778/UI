@@ -14,21 +14,6 @@ async def Hg():
     return {"asdasd": "Hello World"}
 
 
-# @app.get("/v1/firstname")
-# async def get_fake() -> str:
-#     return US_API_GEN.get_first_name()
-
-
-# @app.get(API.lastname)
-# async def get_fake_lastname() -> str:
-#     return US_API_GEN.get_last_name()
-
-
-# @app.get("/v1/in/lastname")
-# async def get_fake_lastname() -> str:
-#     return IN_API_GEN.get_last_name()
-
-
-
 if __name__ == ("__main__"):
-    uvicorn.run('routes:app',reload=True, debug=True, host='0.0.0.0',port=8000)
+    uvicorn.run('routes:app', reload=True,
+                debug=True, host='0.0.0.0', port=8000)

@@ -1,6 +1,6 @@
 from faker.providers.person import en_US
 from typing import Any
-from .person_proto import _Person
+from person_proto import _Person
 
 
 class Person_US(_Person, en_US.Provider):
