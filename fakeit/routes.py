@@ -1,8 +1,5 @@
 from fastapi import FastAPI
-from Person.person_enUS import Person_US
-from Person.person_enIN import Person_IN
 from routers import person_router
-from end_points import API
 import uvicorn
 
 app = FastAPI()
