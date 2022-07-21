@@ -47,7 +47,7 @@ class _Person(PersonProvider):
 
     def get_quantity_full_name(self, quantity: int):
         self.quantity_val_fullname.clear()
-        for i in range(quantity+1):
+        for i in range(quantity):
             self.quantity_val_fullname.add(self.get_full_name())
         return self.quantity_val_fullname
 

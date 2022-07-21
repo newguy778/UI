@@ -13,7 +13,7 @@ person_router = APIRouter(prefix="/v1/person")
 async def get_us_person(quantity: int = 0) -> str:
     if quantity <= 1:
         return PERSON_US_INIT.get_full_name()
-    
+
     return PERSON_US_INIT.get_quantity_full_name(quantity)
 
 
@@ -31,3 +31,9 @@ async def get_dict_rsp() -> Any:
 async def get_person_local(locality: str) -> str:
     if locality == "in":
         return Person_IN().get_full_name()
+    return {"status": "Not Found"}
+
+
+@person_router.get("*")
+async def default_route_not_found():
+    return {"status": "Not Found"}
