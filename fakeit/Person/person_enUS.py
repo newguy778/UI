@@ -19,5 +19,7 @@ if __name__ == "__main__":
     temp = []
     for i in range(2):
         gh = Person_US()
-        temp.append(gh.get_cached_val())
-    print(temp)
+        sr = gh.get_cached_val()
+        temp.append(sr)
+        print(type(sr))
+        print(temp)
