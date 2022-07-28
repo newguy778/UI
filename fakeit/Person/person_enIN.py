@@ -7,6 +7,4 @@ class Person_IN(_Person, en_IN.Provider):
 
 
 if __name__ == "__main__":
-    for i in range(10):
-        gh = Person_IN()
-        print(gh.get_dict())
+    pass

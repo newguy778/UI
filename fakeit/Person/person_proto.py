@@ -5,6 +5,7 @@ from faker import Factory, Generator
 from faker.providers.person import Provider as PersonProvider
 from person_util.birthdate_generator import generate_date_obj
 from datetime import date
+from copy import deepcopy
 in_generator = Generator()
 
 
@@ -12,10 +13,7 @@ class _Person(PersonProvider):
 
     cached_val: Dict[Any, Any] = {}
     data_obj: Dict[str, List] = {'data': []}
-    arr_data = []
-    counter = 0
-
-    quantity_val_fullname: set = set()
+    # counter = 0
 
     def __init__(self) -> None:
         super().__init__(in_generator)
@@ -46,11 +44,10 @@ class _Person(PersonProvider):
         self.get_first_name()
         self.get_last_name()
         self.get_full_name()
-        self.counter += 1
-        return self.cached_val
+        # self.counter += 1
+        return deepcopy(self.cached_val)
 
-    def get_quantity_full_name(self, quantity: int):
-        self.arr_data.clear()
+    def get_multiple_person_val(self, quantity: int = 1):
         for i in range(quantity):
-            self.arr_data.append(self.cached_val)
-        return self.arr_data
+            self.data_obj['data'].append(self.get_cached_val())
+        return self.data_obj
