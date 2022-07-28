@@ -1,5 +1,5 @@
 
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 from faker import Factory, Generator
 from faker.providers.person import Provider as PersonProvider
@@ -11,6 +11,9 @@ in_generator = Generator()
 class _Person(PersonProvider):
 
     cached_val: Dict[Any, Any] = {}
+    data_obj: Dict[str, List] = {'data': []}
+    arr_data = []
+    counter = 0
 
     quantity_val_fullname: set = set()
 
@@ -32,25 +35,22 @@ class _Person(PersonProvider):
         return self.cached_val['last_name']
 
     def get_full_name(self) -> tuple:
-        if self.is_empty('first_name', 'last_name'):
-            self.cached_val['full_name'] = " ".join(
-                (self.get_first_name(), self.get_last_name()))
-            return self.cached_val['full_name']
-        self.get_first_name(), self.get_last_name()
-        full_name_temp = (
-            self.cached_val["first_name"], self.cached_val["last_name"])
-        self.cached_val['full_name'] = " ".join(full_name_temp)
+        self.cached_val["full_name"] = ",".join(
+            (self.cached_val['last_name'], self.cached_val['first_name']))
         return self.cached_val['full_name']
 
     def get_birthdate(self) -> date:
         return generate_date_obj()
 
-    def get_quantity_full_name(self, quantity: int):
-        self.quantity_val_fullname.clear()
-        for i in range(quantity):
-            self.quantity_val_fullname.add(self.get_full_name())
-        return self.quantity_val_fullname
-
-    def get_dict(self):
+    def get_cached_val(self):
+        self.get_first_name()
+        self.get_last_name()
         self.get_full_name()
+        self.counter += 1
         return self.cached_val
+
+    def get_quantity_full_name(self, quantity: int):
+        self.arr_data.clear()
+        for i in range(quantity):
+            self.arr_data.append(self.cached_val)
+        return self.arr_data
