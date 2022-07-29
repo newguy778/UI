@@ -12,9 +12,9 @@ person_router = APIRouter(prefix="/v1/person")
 @person_router.get("/")
 async def get_us_person(quantity: int = 0) -> str:
     if quantity <= 1:
-        return PERSON_US_INIT.get_full_name()
+        return PERSON_US_INIT.get_multiple_person_val()
 
-    return PERSON_US_INIT.get_quantity_full_name(quantity)
+    return PERSON_US_INIT.get_multiple_person_val(quantity)
 
 
 @person_router.get("/dob")
@@ -22,15 +22,15 @@ async def gen_date() -> date:
     return PERSON_US_INIT.get_birthdate()
 
 
-@person_router.get("/dict")
-async def get_dict_rsp() -> Any:
-    return PERSON_US_INIT.get_dict()
+# @person_router.get("/dict")
+# async def get_dict_rsp() -> Any:
+#     return PERSON_US_INIT.get_dict()
 
 
 @person_router.get("/{locality}")
-async def get_person_local(locality: str) -> str:
+async def get_person_local(locality: str, quantity: int = 1) -> str:
     if locality == "in":
-        return Person_IN().get_full_name()
+        return Person_IN().get_multiple_person_val(quantity)
     return {"status": "Not Found"}
 
 
