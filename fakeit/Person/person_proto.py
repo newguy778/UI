@@ -1,12 +1,14 @@
 
 from typing import Any, Dict, List
 
-from faker import Factory, Generator
+from faker import Generator
 from faker.providers.person import Provider as PersonProvider
 from person_util.birthdate_generator import generate_date_obj
 from person_util.email_generator import generate_email
 from datetime import date
 from copy import deepcopy
+
+
 in_generator = Generator()
 
 

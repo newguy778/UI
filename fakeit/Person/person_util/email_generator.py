@@ -16,7 +16,7 @@ def generate_email(*args) -> str:
 
     first_name_email,  last_name_email, *others = [*args]
 
-    emaildomain = f'@{ next(random_emaildomain_yield())}'
+    emaildomain = f'@{next(random_emaildomain_yield())}'
 
     ranom_suffix_number = str(next(random_number_yield()))
 
