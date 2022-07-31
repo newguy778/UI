@@ -47,8 +47,10 @@ class _Person(PersonProvider):
         self.cached_val['email'] = generate_email(
             self.cached_val['first_name'], self.cached_val['last_name'])
         return self.cached_val['email']
+        
 
     def get_cached_val(self) -> Dict[Any, Any]:
+        
         self.counter += 1
         self.cached_val['id'] = self.counter
 
