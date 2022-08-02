@@ -1,6 +1,10 @@
 import pytest
 
-from utils_pro.birthdate_generator import random_month, random_day, random_year
+from fakeit.Person.person_util.birthdate_generator import (
+    random_month,
+    random_day,
+    random_year,
+)
 
 
 def test_month():
