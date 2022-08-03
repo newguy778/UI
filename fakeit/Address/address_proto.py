@@ -1,16 +1,18 @@
 from faker.providers.address import Provider as AddressProvider
 # from Person.person_proto import in_generator
 from typing import Any
-from faker import Generator,Factory
+from faker import Generator,Factory,Faker
 
-ty_generator = Generator()
+class _AddressProto:
 
-class _AddressProto(AddressProvider):
-    def __init__(self) -> None:
-        super().__init__(ty_generator)
+    def __init__(self,local) -> None:
+        self.locality = Faker(local)
+    
     
     def get_address(self):
-        return self.building_number()
-    
-    def getek(self):
-        return self.city()
+        return self.locality.current_country()
+        
+
+gh = _AddressProto('jp_JP')
+
+print(gh.get_address())
