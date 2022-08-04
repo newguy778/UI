@@ -1,21 +1,23 @@
-from faker.providers.address import Provider as AddressProvider
 
 # from Person.person_proto import in_generator
 from typing import Any
-from faker import Generator, Factory, Faker
+from faker import Factory
 
 
-class _AddressProto:
-    def __init__(self, local) -> None:
-        self.locality = Faker(local)
+class _AddressProto(Factory):
+    def __init__(self,local) -> None:
+        self.locality = Factory.create(local)
+        super().__init__()
 
-    def get_address(self):
-        return self.locality.address()
+    def create_factory(self):
+        return self.locality.city()
 
 
-gh = _AddressProto("en_IN")
-
-print(gh.get_address())
+if __name__ == "__main__":
+    gh = _AddressProto("en_IN")
+    print(gh.create_factory())
+# for _ in range(10):
+#     print(gh.get_address(),end = "\n\n\n")
 
 # fk = Factory.create("en_IN")
 # fku = Factory.create("en_US")
