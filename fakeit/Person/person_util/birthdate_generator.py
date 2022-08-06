@@ -1,5 +1,7 @@
 import datetime
 import random
+from typing import Generator
+
 DAYS_IN_MONTH = list(range(1, 32))
 
 """
@@ -8,7 +10,7 @@ TODO: Generate Date based on locality format create function and call that inste
 """
 
 
-def random_month() -> int:
+def random_month() -> Generator:
     yield random.choice(list(range(1, 13)))
 
 
@@ -24,10 +26,10 @@ def random_day(month) -> int:
         return random.choice(DAYS_IN_MONTH[:29])
 
 
-def random_year() -> int:
-    datetime.MINYEAR: int = 1945
+def random_year() -> Generator:
+    datetime.MINYEAR = 1945
     CURRENT_YEAR: int = datetime.date.today().year
-    yield random.choice(list(range(datetime.MINYEAR, CURRENT_YEAR-19)))
+    yield random.choice(list(range(datetime.MINYEAR, CURRENT_YEAR - 19)))
 
 
 def _generate_date() -> tuple:

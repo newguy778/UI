@@ -9,6 +9,7 @@ python = "^3.8"
 Faker = "^13.15.1"
 fastapi = "^0.79.0"
 uvicorn = "^0.18.2"
+mypy = "^0.971"
 
 [tool.poetry.dev-dependencies]
 black = {version = "^22.6.0", allow-prereleases = true}
