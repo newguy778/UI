@@ -11,6 +11,9 @@ async def Hg():
     return {"asdasd": "Hello World"}
 
 
+def main():
+    uvicorn.run("routes:app", reload=True, debug=True, host="0.0.0.0", port=8000)
+
+
 if __name__ == ("__main__"):
-    uvicorn.run('routes:app', reload=True,
-                debug=True, host='0.0.0.0', port=8000)
+    main()
