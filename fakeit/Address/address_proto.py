@@ -32,7 +32,7 @@ class _AddressProto(Factory):
         }
 
     def get_addresses_multiple(self, quantity=1):
-        id = 0
+        id = 1
         address_data = []
         for i in range(quantity):
             id_counter = {"id": id}
