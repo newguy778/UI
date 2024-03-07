@@ -1,41 +1,50 @@
-@ExtendWith(MockitoExtension.class)
-class TransactionServiceTest {
-    
-    @Mock
-    private TransactionMapper transactionMapper;
-    
-    @InjectMocks
-    private TransactionService transactionService;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class ExceptionHandlerTest {
+
+    private final ExceptionHandler exceptionHandler = new ExceptionHandler();
 
     @Test
-    void getAllTransactionsByDateRange_ReturnsExpectedResult() {
+    void handleConcurrencyFailureException() {
         // Arrange
-        String startDate = "2023-01-01";
-        String endDate = "2023-12-31";
-        ZonedDateTime expectedUtcEndDate = generateExpectedUtcEndDate(startDate, endDate);
-        List<Transaction> expectedTransactions = // define expected transactions
-        when(transactionMapper.getAllTransactionsByDateRange(startDate, expectedUtcEndDate.toString()))
-            .thenReturn(expectedTransactions);
-
+        ConcurrencyFailureException exception = new ConcurrencyFailureException();
+        
         // Act
-        List<Transaction> actualTransactions = transactionService.getAllTransactionsByDateRange(startDate, endDate);
-
+        ResponseEntity<String> response = exceptionHandler.handleConnversion(exception);
+        
         // Assert
-        assertEquals(expectedTransactions, actualTransactions);
-        verify(transactionMapper).getAllTransactionsByDateRange(startDate, expectedUtcEndDate.toString());
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertEquals(exception.getMessage(), response.getBody());
     }
 
-    private ZonedDateTime generateExpectedUtcEndDate(String startDate, String endDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate localEndDate = LocalDate.parse(endDate, formatter);
-        ZonedDateTime utcEndDate = localEndDate.atStartOfDay(ZoneId.systemDefault())
-                .plusDays(1)
-                .withZoneSameInstant(ZoneId.of("UTC"));
+    @Test
+    void handleHttpClientErrorException_Unauthorized() {
+        // Arrange
+        HttpClientErrorException exception = new HttpClientErrorException(HttpStatus.UNAUTHORIZED);
         
-        if (localEndDate.isBefore(LocalDate.parse(startDate, formatter))) {
-            throw new IllegalArgumentException("Start date must not be after the end date.");
-        }
+        // Act
+        ResponseEntity<String> response = exceptionHandler.handleUnauthorized(exception);
+        
+        // Assert 
+        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
+        assertEquals(exception.getMessage(), response.getBody());
+    }
 
-        return utcEndDate;
+    @Test
+    void handleHttpClientErrorException_NotFound() {
+        // Arrange
+        HttpClientErrorException exception = new HttpClientErrorException(HttpStatus.NOT_FOUND);
+        
+        // Act
+        ResponseEntity<String> response = exceptionHandler.handleNotFound(exception);
+        
+        // Assert
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode()); 
+        assertEquals(exception.getMessage(), response.getBody());
     }
 }
